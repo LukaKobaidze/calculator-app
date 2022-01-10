@@ -16,10 +16,11 @@ const Theme = ({ currentTheme, toggleThemeHandler }: Props) => {
           <p>3</p>
         </div>
         <div className="theme__main--toggle">
-          <button
+          <input
+            type="button"
             className="theme__main--toggle--btn"
             onClick={toggleThemeHandler}
-          ></button>
+          ></input>
           <div
             className={`theme__main--toggle--circle theme__main--toggle--circle--${currentTheme}`}
           />
