@@ -22,26 +22,38 @@
       margin-bottom: 5px;
     }
     &--toggle {
-      border-radius: 100vw;
-      padding: 0 5px;
+      position: relative;
       height: 27px;
-      border: none;
-      background-color: var(--clr-background-toggle-keypad);
-      cursor: pointer;
-      transition: background-color var(--transition-theme);
+      border-radius: 100vw;
+
+      &--btn {
+        border-radius: 100vw;
+        padding: 0 5px;
+        height: 100%;
+        width: 100%;
+        background-color: var(--clr-background-toggle-keypad);
+        border: none;
+        transition: background-color var(--transition-theme);
+        cursor: pointer;
+      }
 
       &--circle {
         display: block;
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
         border-radius: 50%;
         width: 17px;
         height: 17px;
         background-color: var(--clr-key-background--3);
         transition: transform var(--transition-theme),
           background-color var(--transition-theme);
+        pointer-events: none;
 
         @for $i from 1 through 3 {
           &--#{$i} {
-            transform: translateX(23px * ($i - 1));
+            transform: translateY(-50%) translateX(23px * ($i - 1));
           }
         }
       }
