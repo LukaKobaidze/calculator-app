@@ -1,0 +1,40 @@
+@use './styles/themes';
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+:root {
+  --font-family-default: 'Spartan', sans-serif;
+  --font-weight-default: 700;
+  --font-size-numbers: 32px;
+
+  --transition-theme: 0.5s ease-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-default);
+  background-color: var(--clr-background-main);
+  transition: background-color var(--transition-theme);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 825px;
+
+  @media (max-width: 415px) {
+    min-height: 665px;
+  }
+  @media (max-width: 360px) {
+    min-height: 625px;
+  }
+}

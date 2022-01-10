@@ -1,0 +1,90 @@
+$transition: 0.1s ease-out;
+$transition-opacity-filter: 0.25s;
+
+.button {
+  font-weight: inherit;
+  font-family: inherit;
+  font-size: 21px;
+  position: relative;
+  z-index: 2;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform $transition, filter $transition-opacity-filter,
+    background-color var(--transition-theme), color var(--transition-theme);
+
+  @media (max-width: 625px) {
+    border-radius: 8px;
+  }
+  @media (max-width: 475px) {
+    border-radius: 6px;
+    font-size: 19px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 0;
+    transition: opacity $transition, filter $transition-opacity-filter,
+      color var(--transition-theme);
+
+    @media (max-width: 625px) {
+      border-radius: 8px;
+    }
+    @media (max-width: 475px) {
+      border-radius: 6px;
+    }
+  }
+
+  @media (pointer: fine) {
+    &:hover {
+      filter: brightness(120%);
+      &::before {
+        filter: brightness(120%);
+      }
+    }
+  }
+  &:active {
+    transform: translateY(4px);
+    filter: brightness(140%);
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  &--1 {
+    font-size: var(--font-size-numbers);
+    background-color: var(--clr-key-background--1);
+    color: var(--clr-text--1);
+
+    &::before {
+      color: var(--clr-key-shadow--1);
+    }
+
+    @media (max-width: 415px) {
+      font-size: 27px;
+    }
+  }
+  &--2 {
+    background-color: var(--clr-key-background--2);
+    color: var(--clr-text--2);
+
+    @media (max-width: 415px) {
+      font-size: 17px;
+    }
+
+    &::before {
+      color: var(--clr-key-shadow--2);
+    }
+  }
+  &--3 {
+    background-color: var(--clr-key-background--3);
+    color: var(--clr-text--3);
+
+    &::before {
+      color: var(--clr-key-shadow--3);
+    }
+  }
+}

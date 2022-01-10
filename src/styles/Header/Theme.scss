@@ -1,0 +1,50 @@
+.theme {
+  display: flex;
+  align-items: flex-end;
+
+  &--text {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 75px;
+    margin-left: 25px;
+    &--nums {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+    &--toggle {
+      border-radius: 100vw;
+      padding: 0 5px;
+      height: 27px;
+      border: none;
+      background-color: var(--clr-background-toggle-keypad);
+      cursor: pointer;
+      transition: background-color var(--transition-theme);
+
+      &--circle {
+        display: block;
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        background-color: var(--clr-key-background--3);
+        transition: transform var(--transition-theme),
+          background-color var(--transition-theme);
+
+        @for $i from 1 through 3 {
+          &--#{$i} {
+            transform: translateX(23px * ($i - 1));
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+  color: var(--clr-text);
+  transition: color var(--transition-theme);
+}
