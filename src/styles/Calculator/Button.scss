@@ -38,14 +38,6 @@ $transition-opacity-filter: 0.25s;
     }
   }
 
-  @media (pointer: fine) {
-    &:hover {
-      filter: brightness(120%);
-      &::before {
-        filter: brightness(120%);
-      }
-    }
-  }
   &:active {
     transform: translateY(4px);
     filter: brightness(140%);
