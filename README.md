@@ -41,10 +41,6 @@ Users should be able to:
 - TypeScript
 - SCSS
 
-### What I learned
-
-I learned how to write Recursion. I never really fully understood how to write recursive functions, but after this challenge, I understand it now. I used recursion for calculations. I also got better at CSS Grid.
-
 ## Author
 
 - Frontend Mentor - [@LukaKobaidze](https://www.frontendmentor.io/profile/LukaKobaidze)

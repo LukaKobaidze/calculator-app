@@ -1,46 +1,42 @@
 import { useEffect, useState } from 'react';
-import Header from './components/Header/Header';
-import Calculator from './components/Calculator/Calculator';
-import './styles/App.scss';
+import Header from 'components/Header';
+import Calculator from 'components/Calculator';
+import 'styles/App.scss';
 
-const changeTheme = (theme: number) => {
-  const body = document.body;
-  const prevTheme = body.classList.value + '';
-  if (prevTheme) {
-    body.classList.remove(prevTheme);
-  }
-  body.classList.add(`theme--${theme}`);
-};
-
-const App = () => {
+export default function App() {
   const initialTheme = () => window.localStorage.getItem('theme') || 1;
-  const [theme, setTheme] = useState(+initialTheme());
+  
+  const [theme, setTheme] = useState(Number(initialTheme()));
+  const [themeSwitchDirection, setThemeSwitchDirection] = useState<'left' | 'right'>(
+    'right'
+  );
 
   useEffect(() => {
-    changeTheme(theme);
+    const body = document.body;
+    const prevTheme = body.classList.value + '';
+    if (prevTheme) {
+      body.classList.remove(prevTheme);
+    }
+    body.classList.add(`theme--${theme}`);
+
     window.localStorage.setItem('theme', String(theme));
+    setThemeSwitchDirection((state) =>
+      theme === 1 ? 'right' : theme === 3 ? 'left' : state
+    );
   }, [theme]);
 
-  const toggleThemeHandler = () => {
-    setTheme(prevTheme => {
-      let themeNumber = prevTheme;
-      if (themeNumber < 3) {
-        themeNumber++;
-      } else {
-        themeNumber = 1;
-      }
-      return themeNumber;
+  const handleThemeSwitch = () => {
+    setTheme((state) => {
+      return themeSwitchDirection === 'right' ? state + 1 : state - 1;
     });
   };
 
   return (
     <div className="app">
-      <Header currentTheme={theme} toggleThemeHandler={toggleThemeHandler} />
+      <Header theme={theme} setTheme={setTheme} onThemeSwitch={handleThemeSwitch} />
       <main>
         <Calculator />
       </main>
     </div>
   );
-};
-
-export default App;
+}

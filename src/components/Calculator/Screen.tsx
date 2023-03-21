@@ -1,15 +1,26 @@
-import '../../styles/Calculator/Screen.scss';
+import { useEffect, useRef } from 'react';
+import 'styles/Calculator/Screen.scss';
 
-type Props = {
-  enteredValue: string;
-};
+interface Props {
+  value: string;
+}
 
-const Screen = ({ enteredValue }: Props) => {
+export default function Screen(props: Props) {
+  const { value } = props;
+  const scrollableRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = scrollableRef.current;
+    if (element) {
+      element.scrollLeft = element.scrollWidth;
+    }
+  }, [value]);
+
   return (
     <div className="screen">
-      <span>{enteredValue.split(' ').join('')}</span>
+      <div ref={scrollableRef} className="screen__scrollable">
+        <span className="screen__text">{value.split(' ').join('')}</span>
+      </div>
     </div>
   );
-};
-
-export default Screen;
+}

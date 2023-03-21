@@ -1,67 +1,77 @@
-import keypadKeys from './keypad-keys';
-import Button from './Button';
-import '../../styles/Calculator/Keypad.scss';
+import { keypadKeys } from './helpers';
+import Key from './Key';
+import 'styles/Calculator/Keypad.scss';
 
-type Props = {
-  enterValueHandler: (value: string | number | undefined) => void;
-  deleteHandler: () => void;
-  resetHandler: () => void;
-  equalHandler: () => void;
-};
+interface Props {
+  keyPressed: string | null;
+  onValue: (value: string | number) => void;
+  onDelete: () => void;
+  onReset: () => void;
+  onEquals: () => void;
+}
 
-const Keypad = (props: Props) => {
-  const { enterValueHandler, deleteHandler, resetHandler, equalHandler } =
-    props;
+export default function Keypad(props: Props) {
+  const { keyPressed, onValue, onDelete, onReset, onEquals } = props;
 
-  const renderNumbers = () => {
-    const keypadNumbers: any = keypadKeys.numbers;
-    return Object.keys(keypadNumbers).map(wordNumber => (
-      <Button
-        type={1}
-        style={{ gridArea: wordNumber.toLowerCase() }}
-        key={keypadNumbers[wordNumber]}
-        onEnterValue={enterValueHandler}
-      >
-        {keypadNumbers[wordNumber]}
-      </Button>
-    ));
-  };
-
-  const renderOperations = () => {
-    const keypadOperations: any = keypadKeys.operators;
-    return Object.keys(keypadOperations).map(operation => (
-      <Button
-        type={1}
-        style={{ gridArea: operation }}
-        onEnterValue={enterValueHandler}
-        key={operation}
-      >
-        {keypadOperations[operation]}
-      </Button>
-    ));
-  };
   return (
     <div className="keypad">
-      {renderNumbers()}
-      {renderOperations()}
-      <Button
+      {Object.keys(keypadKeys.numbers).map((key) => (
+        <Key
+          key={keypadKeys.numbers[key]}
+          type={1}
+          style={{ gridArea: key }}
+          onClick={() => onValue(keypadKeys.numbers[key])}
+          active={keyPressed === String(keypadKeys.numbers[key])}
+        >
+          {keypadKeys.numbers[key]}
+        </Key>
+      ))}
+
+      <Key
         type={1}
         style={{ gridArea: 'decimal' }}
-        onEnterValue={enterValueHandler}
+        onClick={() => onValue('.')}
+        active={keyPressed === 'decimal'}
       >
         .
-      </Button>
-      <Button type={2} style={{ gridArea: 'delete' }} onDelete={deleteHandler}>
+      </Key>
+
+      {Object.keys(keypadKeys.operators).map((key) => (
+        <Key
+          key={key}
+          type={1}
+          style={{ gridArea: key }}
+          onClick={() => onValue(keypadKeys.operators[key])}
+          active={keyPressed === keypadKeys.operators[key]}
+        >
+          {keypadKeys.operators[key]}
+        </Key>
+      ))}
+
+      <Key
+        type={2}
+        style={{ gridArea: 'delete' }}
+        onClick={onDelete}
+        active={keyPressed === 'delete'}
+      >
         DEL
-      </Button>
-      <Button type={2} style={{ gridArea: 'reset' }} onReset={resetHandler}>
+      </Key>
+      <Key
+        type={2}
+        style={{ gridArea: 'reset' }}
+        onClick={onReset}
+        active={keyPressed === 'reset'}
+      >
         RESET
-      </Button>
-      <Button type={3} style={{ gridArea: 'equal' }} onEqual={equalHandler}>
+      </Key>
+      <Key
+        type={3}
+        style={{ gridArea: 'equals' }}
+        onClick={onEquals}
+        active={keyPressed === 'equals'}
+      >
         =
-      </Button>
+      </Key>
     </div>
   );
-};
-
-export default Keypad;
+}

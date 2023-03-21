@@ -1,0 +1,69 @@
+.theme {
+  display: flex;
+  align-items: flex-end;
+
+  &__text {
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 71px;
+    margin-left: 26px;
+  }
+
+  &__nums {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 9px;
+    font-size: 12px;
+    user-select: none;
+
+    & > span {
+      cursor: pointer;
+      padding-bottom: 5px;
+    }
+  }
+
+  &__switch {
+    position: relative;
+    height: 26px;
+    border-radius: 100vw;
+
+    &-btn {
+      border-radius: 100vw;
+      padding: 0 5px;
+      height: 100%;
+      width: 100%;
+      background-color: var(--clr-background-toggle-keypad);
+      border: none;
+      transition: background-color var(--transition-theme);
+      cursor: pointer;
+    }
+
+    &-circle {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      width: 17px;
+      height: 17px;
+      background-color: var(--clr-key-background--3);
+      transition: transform var(--transition-theme),
+        background-color var(--transition-theme);
+      pointer-events: none;
+
+      @for $i from 1 through 3 {
+        &--#{$i} {
+          transform: translateY(-50%) translateX(22px * ($i - 1));
+        }
+      }
+    }
+  }
+}
